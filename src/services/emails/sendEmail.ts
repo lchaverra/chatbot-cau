@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { responseMessages } from "../../resources/strings";
+import { strings } from "../../resources/strings";
 dotenv.config();
 
 // la cuenta desde la que se enviaran los correos
@@ -31,8 +31,8 @@ export async function sendEmail(receiverEmail: string, message: string): Promise
   // Envío del correo electrónico
   try {
     await transporter.sendMail(mailOptions);
-    return responseMessages.ticketCreationSuccessfully;
+    return strings.ticketCreationSuccessfully;
   } catch (error) {
-    return responseMessages.emailSendingFailed;
+    return strings.emailSendingFailed;
   }
 }

@@ -8,15 +8,15 @@ import { changeActiveProfile } from "../services/GPLi/methods/changeActiveProfil
 import { createTicket } from "../services/GPLi/methods/createTicket";
 import { EmailValidatorResults, isEmailValid } from "../services/emails/emailValidator";
 import { sendEmail } from "../services/emails/sendEmail";
-import { responseMessages } from "../resources/strings";
+import { strings } from "../resources/strings";
 
 async function processWebhookRequest(request: Request, response: Response) {
   const email: string = request.body.email;
   const emailValidatorResults = isEmailValid(email);
   if (emailValidatorResults === EmailValidatorResults.INVALID) {
-    response.status(400).json({ message: responseMessages.invalidEmail });
+    response.status(400).json({ message: strings.invalidEmail });
   } else if (emailValidatorResults === EmailValidatorResults.NOT_CORP) {
-    response.status(400).json({ message: responseMessages.notCorpEmail });
+    response.status(400).json({ message: strings.notCorpEmail });
   } else {
     try {
       const sessionToken = await initSession();
